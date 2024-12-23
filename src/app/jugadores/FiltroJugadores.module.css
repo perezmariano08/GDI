@@ -1,0 +1,92 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.input {
+    display: block;
+    border-radius: 20px;
+    background-color: var(--white-200);
+    border: 1px solid var(--white-300);
+    padding: 10px 16px;
+    font-size: 16px;
+    width: 50%;
+    transition: all .2s ease-in;
+    color: var(--black-700);
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+}
+
+.input::placeholder {
+    color: var(--white-600);
+}
+
+.input:focus-visible {
+    outline: none;
+    border-color: var(--white-600);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.paginacion {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+    margin: 10px 0;
+    user-select: none;
+}
+
+.paginacionBoton,
+.paginacionNumero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--white-300);
+    background-color: var(--white-200);
+    color: var(--white-600);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        background-color: var(--red);
+        color: var(--white-50);
+        border-color: var(--red);
+    }
+}
+
+.paginacionNumero {
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
+
+.paginacionBoton:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+.paginacionActivo {
+    background-color: var(--red);
+    color: var(--white-50);
+    border-color: var(--red);
+    transition: all 0.3s;
+}
+
+.paginacionInfo {
+    font-size: 14px;
+    margin-right: 10px;
+    color: #333;
+}
