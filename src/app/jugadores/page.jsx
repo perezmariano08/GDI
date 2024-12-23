@@ -1,6 +1,8 @@
+import { URL_API } from "@/utils/constants";
+
 async function obtenerJugadores() {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/jugadores`);
+        const response = await fetch(`${URL_API}/jugadores`);
         if (!response.ok) {
             console.error('Error al obtener los jugadores:', response.statusText);
             return []; // Devuelve un array vacío si hay error
