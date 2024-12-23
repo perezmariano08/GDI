@@ -1,4 +1,5 @@
 import { URL_API } from "@/utils/constants";
+import FiltroJugadores from "./filtroJugadores";
 
 async function obtenerJugadores() {
     try {
