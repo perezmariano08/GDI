@@ -1,25 +1,30 @@
-export async function getServerSideProps() {
+async function obtenerJugadores() {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/jugadores`);
         if (!response.ok) {
-            return { props: { jugadores: [] } }; // Manejo de errores
+            console.error('Error al obtener los jugadores:', response.statusText);
+            return []; // Devuelve un array vacío si hay error
         }
-        const jugadores = await response.json();
-        return { props: { jugadores } };
+        const data = await response.json();
+        return data;
     } catch (error) {
-        console.error('Error al obtener los jugadores:', error.message);
-        return { props: { jugadores: [] } };
+        console.error('Error al conectar con la API:', error.message);
+        return []; // Devuelve un array vacío si hay error
     }
 }
 
-export default function PageJugadores({ jugadores }) {
+export default async function PageJugadores() {
+    const jugadores = await obtenerJugadores();
+
     return (
-        <div>
-            {jugadores.length > 0 ? (
-                <FiltroJugadores jugadores={jugadores} />
-            ) : (
-                <p>No hay jugadores disponibles.</p>
-            )}
+        <div className="container">
+            <div className="wrapper">
+                {jugadores.length > 0 ? (
+                    <FiltroJugadores jugadores={jugadores} />
+                ) : (
+                    <p>No hay jugadores disponibles.</p>
+                )}
+            </div>
         </div>
     );
 }
