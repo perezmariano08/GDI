@@ -1,28 +1,29 @@
-// src/app/jugadores/page.jsx
-
-import FiltroJugadores from "./filtroJugadores";
-
 async function obtenerJugadores() {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/jugadores`);
         if (!response.ok) {
-            throw new Error('Error al obtener los jugadores');
+            console.error('Error al obtener los jugadores:', response.statusText);
+            return []; // Devuelve un array vacío si hay error
         }
         const data = await response.json();
         return data;
     } catch (error) {
-        throw new Error(error.message);
+        console.error('Error al conectar con la API:', error.message);
+        return []; // Devuelve un array vacío si hay error
     }
 }
 
-
 export default async function PageJugadores() {
-    const jugadores = await obtenerJugadores(); // Obtén los jugadores en el servidor
+    const jugadores = await obtenerJugadores();
 
     return (
         <div className="container">
             <div className="wrapper">
-                <FiltroJugadores jugadores={jugadores} />
+                {jugadores.length > 0 ? (
+                    <FiltroJugadores jugadores={jugadores} />
+                ) : (
+                    <p>No hay jugadores disponibles.</p>
+                )}
             </div>
         </div>
     );
